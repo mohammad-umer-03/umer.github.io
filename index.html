@@ -41,62 +41,47 @@
         const launchDate = new Date(2023, 11, 31, 23, 59, 59).getTime();
 
         // Create a Three.js scene
-        const scene = new THREE.Scene();
+       // Create a scene
+const scene = new THREE.Scene();
 
-        // Create a Three.js camera
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+// Create a camera
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-        // Create a Three.js renderer
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('scene-container').appendChild(renderer.domElement);
+// Create a renderer
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById('scene-container').appendChild(renderer.domElement);
 
-        // Load the Rolex watch 3D model (replace 'rolex.glb' with your model file)
-        const loader = new THREE.GLTFLoader();
-        let rolexWatch;
-        loader.load('rolex.glb', (gltf) => {
-            rolexWatch = gltf.scene;
-            scene.add(rolexWatch);
-        });
+// Add lighting to the scene
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Ambient light
+scene.add(ambientLight);
 
-        // Set the initial camera position
-        camera.position.z = 5;
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Directional light
+directionalLight.position.set(1, 1, 1);
+scene.add(directionalLight);
 
-        // Function to update the countdown timer and animation
-        function animate() {
-            requestAnimationFrame(animate);
+// Load the 3D model (replace 'rolex.glb' with your model's path)
+const loader = new THREE.GLTFLoader();
+let rolexWatch;
 
-            // Update the countdown timer
-            const now = new Date().getTime();
-            const timeRemaining = launchDate - now;
+loader.load('rolex.glb', (gltf) => {
+    rolexWatch = gltf.scene;
+    scene.add(rolexWatch);
+});
 
-            if (timeRemaining <= 0) {
-                // Set a message when the timer reaches zero
-                document.getElementById('timer').innerHTML = 'Website is now live!';
-            } else {
-                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+// Set camera position
+camera.position.z = 5;
 
-                // Display the countdown timer
-                document.getElementById('timer').innerHTML = `
-                    <p>Website Launches In:</p>
-                    <div class="countdown">
-                        <span>${days}d</span>
-                        <span>${hours}h</span>
-                        <span>${minutes}m</span>
-                        <span>${seconds}s</span>
-                    </div>
-                `;
-            }
+// Animation function
+const animate = function () {
+    requestAnimationFrame(animate);
+    // Update the countdown timer and render the scene
+    // ...
 
-            // Render the 3D scene
-            renderer.render(scene, camera);
-        }
+    renderer.render(scene, camera);
+};
 
-        // Start the animation loop
-        animate();
+animate();
     </script>
 
     <!-- Countdown Timer and Animation Display -->
