@@ -3,60 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deploying Soon</title>
+    <meta name="description" content="Your website's description goes here">
+    <meta name="keywords" content="your, keywords, here">
+    <title>Coming Soon - Mohammad Umer</title>
+
+    <!-- Add any other meta tags and link to stylesheets here -->
+
+    <!-- Favicon (replace 'favicon.ico' with your own) -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Open Graph and Twitter Card for Social Sharing (customize as needed) -->
+    <meta property="og:title" content="Coming Soon - Your Website Name">
+    <meta property="og:description" content="Your website's description goes here">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <meta property="og:url" content="https://example.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Fonts (replace 'font-name' with your chosen font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap" rel="stylesheet">
+
+    <!-- External CSS (customize as needed) -->
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Add custom CSS for improved design here */
+        body {
+            font-family: 'Font Name', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        #countdown {
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
+
+        .countdown span {
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        #subscribe {
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Deploying Soon</h1>
-        <p>Our website is under construction and will be live on 01/01/2024.</p>
-    </div>
+        <p>Your website is under construction, will be Deploying soon.</p>
+    </header>
 
-    <div id="animation-container"></div>
+    <section id="countdown">
+        <h2>Countdown Timer</h2>
+        <div class="countdown">
+            <!-- Countdown timer script will update this section -->
+        </div>
+    </section>
 
+    <section id="subscribe">
+        <h2>Stay Informed</h2>
+        <p>Subscribe to our newsletter for updates:</p>
+        <form action="your-subscribe-url" method="post">
+            <!-- Add your subscription form here -->
+            <input type="email" placeholder="Enter your email" required>
+            <input type="submit" value="Subscribe">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Your Website Name. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Countdown Timer (customize as needed) -->
     <script>
-        // Set the date when the main website should go live (YYYY, MM - 1, DD, HH, MM, SS)
+        // Set the date and time when your website will go live (YYYY, MM - 1, DD, HH, MM, SS)
         const launchDate = new Date(2023, 12, 31, 23, 59, 59).getTime();
 
-        const timer = setInterval(function() {
+        // Function to update the countdown timer
+        function updateTimer() {
             const now = new Date().getTime();
             const timeRemaining = launchDate - now;
 
             if (timeRemaining <= 0) {
                 clearInterval(timer);
-                // Redirect to the main website
-                window.location.href = 'https://mohammad-umer-03.github.io/umer.github.io/'; // Replace with your website's URL
-            }
-        }, 1000);
-    </script>
-
-    <script>
-        // Three.js Cube Animation
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('animation-container').appendChild(renderer.domElement);
-
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-
-        camera.position.z = 5;
-
-        const animate = function () {
-            requestAnimationFrame(animate);
-
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-
-            renderer.render(scene, camera);
-        };
-
-        animate();
-    </script>
-</body>
-</html>
+                document.querySelector('.countdown').innerHTML = '<p>Website is now live! <a href="https://example.com">Visit Now</a></p>';
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) /
