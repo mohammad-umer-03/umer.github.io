@@ -1,0 +1,47 @@
+body {
+    font-family: 'Inconsolata', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+section h2 {
+    font-size: 1.5em;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.project {
+    margin: 10px 0;
+}
+
+.project h3 {
+    font-size: 1.2em;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
