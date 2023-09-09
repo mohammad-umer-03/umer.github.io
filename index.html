@@ -1,175 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your website's description goes here">
-    <meta name="keywords" content="your, keywords, here">
-    <title>Coming Soon - Mohammad Umer</title>
+    <meta name="description" content="Countdown timer for the launch of Your Website Name.">
+    <meta name="keywords" content="countdown, timer, website launch, coming soon">
+    <title>Countdown Timer - Mohammad Umer</title>
 
-    <!-- Add any other meta tags and link to stylesheets here -->
+    <!-- Styles and Favicon -->
+    <style>
+        /* CSS styles for basic page layout and appearance */
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
 
-    <!-- Favicon (replace 'favicon.ico' with your own) -->
+        /* Add any other custom styles here */
+    </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <!-- Open Graph and Twitter Card for Social Sharing (customize as needed) -->
-    <meta property="og:title" content="Coming Soon - Your Website Name">
-    <meta property="og:description" content="Your website's description goes here">
-    <meta property="og:image" content="https://example.com/og-image.jpg">
-    <meta property="og:url" content="https://example.com">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- External JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Google Fonts (replace 'font-name' with your chosen font) -->
-    <link href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap" rel="stylesheet">
-
-    <!-- External CSS (customize as needed) -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Inline CSS for Animation Container -->
     <style>
-        /* Add custom CSS for improved design here */
-        body {
-            font-family: 'Font Name', sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-
-        header {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 1.2em;
-        }
-
-        #countdown {
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5em;
-        }
-
-        .countdown span {
-            margin: 0 10px;
-            padding: 10px;
-            background-color: #007BFF;
-            color: #fff;
-            border-radius: 5px;
-        }
-
-        #subscribe {
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-        }
-
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
+        /* CSS for the animation container */
+        #scene-container {
+            position: relative;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Coming Soon</h1>
-        <p>Your website is under construction and will be live soon.</p>
-    </header>
+    <!-- Animation Container -->
+    <div id="scene-container"></div>
 
-    <section id="countdown">
-        <!-- ... (countdown timer section) ... -->
-    </section>
-
-    <section id="subscribe">
-        <!-- ... (newsletter subscription section) ... -->
-    </section>
-
-    <div id="custom-animation">
-        <!-- Replace the Three.js animation with a different animation here -->
-        <div class="animation-box"></div>
-    </div>
-
-    <footer>
-        <!-- ... (footer) ... -->
-    </footer>
-
-    <style>
-        /* Add CSS for your custom animation here */
-        #custom-animation {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-        }
-
-        .animation-box {
-            width: 100px;
-            height: 100px;
-            background-color: #007BFF;
-            animation: custom-animation 2s linear infinite; /* Adjust animation duration and properties */
-        }
-
-        @keyframes custom-animation {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
-    <!-- JavaScript for Countdown Timer (customize as needed) -->
+    <!-- JavaScript for Countdown Timer and 3D Animation -->
     <script>
         // Set the date and time when your website will go live (YYYY, MM - 1, DD, HH, MM, SS)
         const launchDate = new Date(2023, 11, 31, 23, 59, 59).getTime();
 
-        // Function to update the countdown timer
-        function updateTimer() {
+        // Create a Three.js scene
+        const scene = new THREE.Scene();
+
+        // Create a Three.js camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // Create a Three.js renderer
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('scene-container').appendChild(renderer.domElement);
+
+        // Load the Rolex watch 3D model (replace 'rolex.glb' with your model file)
+        const loader = new THREE.GLTFLoader();
+        let rolexWatch;
+        loader.load('rolex.glb', (gltf) => {
+            rolexWatch = gltf.scene;
+            scene.add(rolexWatch);
+        });
+
+        // Set the initial camera position
+        camera.position.z = 5;
+
+        // Function to update the countdown timer and animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update the countdown timer
             const now = new Date().getTime();
             const timeRemaining = launchDate - now;
 
             if (timeRemaining <= 0) {
-                clearInterval(timer);
-                document.querySelector('.countdown').innerHTML = '<p>Website is now live! <a href="https://example.com">Visit Now</a></p>';
+                // Set a message when the timer reaches zero
+                document.getElementById('timer').innerHTML = 'Website is now live!';
             } else {
                 const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
+                // Display the countdown timer
                 document.getElementById('timer').innerHTML = `
                     <p>Website Launches In:</p>
                     <div class="countdown">
@@ -180,11 +90,16 @@
                     </div>
                 `;
             }
+
+            // Render the 3D scene
+            renderer.render(scene, camera);
         }
 
-        // Update the timer immediately and then every 1 second
-        updateTimer();
-        const timer = setInterval(updateTimer, 1000);
+        // Start the animation loop
+        animate();
     </script>
+
+    <!-- Countdown Timer and Animation Display -->
+    <div id="timer" style="position: absolute; top: 20px; left: 20px; color: white;"></div>
 </body>
 </html>
