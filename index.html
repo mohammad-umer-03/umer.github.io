@@ -5,23 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deploying Soon</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Deploying Soon</h1>
-        <p>Our website is under construction and will be live on [01/01/2024].</p>
+        <p>Our website is under construction and will be live on 01/01/2024.</p>
     </div>
 
-    <!-- Optional Three.js 3D Animation Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Your Three.js code here to create a 3D animation
-    </script>
+    <div id="animation-container"></div>
 
-    <!-- Countdown Timer and Redirect Script -->
     <script>
         // Set the date when the main website should go live (YYYY, MM - 1, DD, HH, MM, SS)
-        const launchDate = new Date(2023, 31, 12, 23, 59, 59).getTime();
+        const launchDate = new Date(2023, 12, 31, 23, 59, 59).getTime();
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
@@ -30,9 +26,37 @@
             if (timeRemaining <= 0) {
                 clearInterval(timer);
                 // Redirect to the main website
-                window.location.href = 'https://www.example.com'; // Replace with your website's URL
+                window.location.href = 'https://mohammad-umer-03.github.io/umer.github.io/'; // Replace with your website's URL
             }
         }, 1000);
+    </script>
+
+    <script>
+        // Three.js Cube Animation
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('animation-container').appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        const animate = function () {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
     </script>
 </body>
 </html>
