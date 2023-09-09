@@ -1,90 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Metadata for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Countdown timer for the launch of Your Website Name.">
-    <meta name="keywords" content="countdown, timer, website launch, coming soon">
-    <title>Countdown Timer - Mohammad Umer</title>
-
-    <!-- Styles and Favicon -->
-    <style>
-        /* CSS styles for basic page layout and appearance */
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        /* Add any other custom styles here */
-    </style>
+    <meta name="description" content="Countdown timer on a 3D Rolex watch. Your website's description goes here.">
+    <meta name="keywords" content="your, keywords, here">
+    <title>Coming Soon - Your Website Name</title>
+    
+    <!-- Add any other meta tags and link to stylesheets here -->
+    
+    <!-- Favicon (replace 'favicon.ico' with your own) -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-    <!-- External JavaScript Libraries -->
+    
+    <!-- Open Graph and Twitter Card for Social Sharing (customize as needed) -->
+    <meta property="og:title" content="Coming Soon - Your Website Name">
+    <meta property="og:description" content="Countdown timer on a 3D Rolex watch. Your website's description goes here.">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <meta property="og:url" content="https://example.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Google Fonts (replace 'font-name' with your chosen font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap" rel="stylesheet">
+    
+    <!-- External CSS (customize as needed) -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Three.js library (use the appropriate version) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- Inline CSS for Animation Container -->
-    <style>
-        /* CSS for the animation container */
-        #scene-container {
-            position: relative;
-        }
-    </style>
 </head>
 <body>
-    <!-- Animation Container -->
-    <div id="scene-container"></div>
+    <header>
+        <h1>Coming Soon</h1>
+        <p>Your website is under construction and will be live soon.</p>
+    </header>
 
-    <!-- JavaScript for Countdown Timer and 3D Animation -->
+    <section id="countdown">
+        <h2>Countdown Timer</h2>
+        <div id="timer">
+            <!-- Countdown timer script will update this section -->
+        </div>
+    </section>
+
+    <section id="3d-watch">
+        <!-- Add your 3D Rolex watch model here -->
+        <!-- You may need to use a 3D modeling software and export the model -->
+        <!-- Include Three.js code for rendering the 3D model here -->
+    </section>
+
+    <section id="subscribe">
+        <h2>Stay Informed</h2>
+        <p>Subscribe to our newsletter for updates:</p>
+        <form action="your-subscribe-url" method="post">
+            <!-- Add your subscription form here -->
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Your Website Name. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Countdown Timer (customize as needed) -->
     <script>
         // Set the date and time when your website will go live (YYYY, MM - 1, DD, HH, MM, SS)
         const launchDate = new Date(2023, 11, 31, 23, 59, 59).getTime();
 
-        // Create a Three.js scene
-       // Create a scene
-const scene = new THREE.Scene();
+        // Function to update the countdown timer
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeRemaining = launchDate - now;
 
-// Create a camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            if (timeRemaining <= 0) {
+                clearInterval(timer);
+                document.getElementById('timer').innerHTML = '<p>Website is now live! <a href="https://example.com">Visit Now</a></p>';
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                document.getElementById('timer').innerHTML = `
+                    <p>Website Launches In:</p>
+                    <div class="countdown">
+                        <span>${days}d</span>
+                        <span>${hours}h</span>
+                        <span>${minutes}m</span>
+                        <span>${seconds}s</span>
+                    </div>
+                `;
+            }
+        }
 
-// Create a renderer
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('scene-container').appendChild(renderer.domElement);
-
-// Add lighting to the scene
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Ambient light
-scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Directional light
-directionalLight.position.set(1, 1, 1);
-scene.add(directionalLight);
-
-// Load the 3D model (replace 'rolex.glb' with your model's path)
-const loader = new THREE.GLTFLoader();
-let rolexWatch;
-
-loader.load('rolex.glb', (gltf) => {
-    rolexWatch = gltf.scene;
-    scene.add(rolexWatch);
-});
-
-// Set camera position
-camera.position.z = 5;
-
-// Animation function
-const animate = function () {
-    requestAnimationFrame(animate);
-    // Update the countdown timer and render the scene
-    // ...
-
-    renderer.render(scene, camera);
-};
-
-animate();
+        // Update the timer immediately and then every 1 second
+        updateTimer();
+        const timer = setInterval(updateTimer, 1000);
     </script>
-
-    <!-- Countdown Timer and Animation Display -->
-    <div id="timer" style="position: absolute; top: 20px; left: 20px; color: white;"></div>
+    
+    <!-- JavaScript for Three.js rendering (customize as needed) -->
+    <script>
+        // Include your Three.js code for rendering the 3D Rolex watch model here
+        // This may involve loading the model, defining lighting, camera, and animation
+    </script>
 </body>
 </html>
