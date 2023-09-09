@@ -104,35 +104,57 @@
 </head>
 <body>
     <header>
-        <h1>Deploying Soon</h1>
-        <p>Your website is under construction, will be Deploying soon.</p>
+        <h1>Coming Soon</h1>
+        <p>Your website is under construction and will be live soon.</p>
     </header>
 
     <section id="countdown">
-        <h2>Countdown Timer</h2>
-        <div class="countdown">
-            <!-- Countdown timer script will update this section -->
-        </div>
+        <!-- ... (countdown timer section) ... -->
     </section>
 
     <section id="subscribe">
-        <h2>Stay Informed</h2>
-        <p>Subscribe to our newsletter for updates:</p>
-        <form action="your-subscribe-url" method="post">
-            <!-- Add your subscription form here -->
-            <input type="email" placeholder="Enter your email" required>
-            <input type="submit" value="Subscribe">
-        </form>
+        <!-- ... (newsletter subscription section) ... -->
     </section>
 
+    <div id="custom-animation">
+        <!-- Replace the Three.js animation with a different animation here -->
+        <div class="animation-box"></div>
+    </div>
+
     <footer>
-        <p>&copy; 2023 Your Website Name. All rights reserved.</p>
+        <!-- ... (footer) ... -->
     </footer>
+
+    <style>
+        /* Add CSS for your custom animation here */
+        #custom-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .animation-box {
+            width: 100px;
+            height: 100px;
+            background-color: #007BFF;
+            animation: custom-animation 2s linear infinite; /* Adjust animation duration and properties */
+        }
+
+        @keyframes custom-animation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 
     <!-- JavaScript for Countdown Timer (customize as needed) -->
     <script>
         // Set the date and time when your website will go live (YYYY, MM - 1, DD, HH, MM, SS)
-        const launchDate = new Date(2023, 12, 31, 23, 59, 59).getTime();
+        const launchDate = new Date(2023, 11, 31, 23, 59, 59).getTime();
 
         // Function to update the countdown timer
         function updateTimer() {
@@ -145,4 +167,24 @@
             } else {
                 const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) /
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                document.getElementById('timer').innerHTML = `
+                    <p>Website Launches In:</p>
+                    <div class="countdown">
+                        <span>${days}d</span>
+                        <span>${hours}h</span>
+                        <span>${minutes}m</span>
+                        <span>${seconds}s</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Update the timer immediately and then every 1 second
+        updateTimer();
+        const timer = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
