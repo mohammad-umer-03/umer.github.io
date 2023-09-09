@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploying Soon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Deploying Soon</h1>
+        <p>Our website is under construction and will be live on [01/01/2024].</p>
+    </div>
+
+    <!-- Optional Three.js 3D Animation Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Your Three.js code here to create a 3D animation
+    </script>
+
+    <!-- Countdown Timer and Redirect Script -->
+    <script>
+        // Set the date when the main website should go live (YYYY, MM - 1, DD, HH, MM, SS)
+        const launchDate = new Date(2023, 31, 12, 23, 59, 59).getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const timeRemaining = launchDate - now;
+
+            if (timeRemaining <= 0) {
+                clearInterval(timer);
+                // Redirect to the main website
+                window.location.href = 'https://www.example.com'; // Replace with your website's URL
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
